@@ -1,0 +1,3 @@
+reportlab>=4.2.0
+matplotlib>=3.8.0
+# Pillow>=10.0.0   # optional: faster image handling; native PNG/JPEG reader is built in
