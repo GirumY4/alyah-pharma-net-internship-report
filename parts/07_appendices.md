@@ -1,5 +1,17 @@
 ## Appendix A — Selected API Endpoints
 
+This appendix presents a representative subset of the REST API endpoints exposed by the shared backend [3], illustrating the role-based access control and the tenant-scoping mechanisms described in Part Four.
+
+<!-- table: Core REST endpoints and access roles [3] -->
+| Endpoint | Method | Access |
+| --- | --- | --- |
+| /api/auth/login | POST | Public |
+| /api/medicines | GET / POST | pharmacy_manager, admin |
+| /api/medicines/marketplace | GET | Public |
+| /api/orders | POST | public_user |
+| /api/orders/:id/status | PATCH | pharmacy_manager, admin |
+| /api/logs | GET | pharmacy_manager, admin |
+
 <!-- table: Core REST endpoints and access roles -->
 
 | Endpoint                   | Method     | Access                  |
@@ -12,6 +24,8 @@
 | /api/logs                  | GET        | pharmacy_manager, admin |
 
 ## Appendix B — Representative Code Extract
+
+The following extract from the order fulfillment service [8] illustrates the atomic stock deduction mechanism described in Part Four. The use of the atomic increment operator inside a database session [16] prevents race conditions under concurrent consumer approvals.
 
 ```typescript
 // Atomic stock deduction on order approval (orders.service.ts)
@@ -75,9 +89,9 @@ Save as PNG, width >= 1280 px, into assets/images/. -->
 
 ## Appendix D — Production Deployment Configuration
 
-The platform is deployed as three independent cloud components: a stateless Node.js API on Render, a static React bundle on Vercel, and a managed MongoDB cluster on Atlas. This appendix records the hosting assignment, the environment configuration of each platform, and the issues encountered — and resolved — during the production rollout.
+The platform is deployed as three independent cloud components: a stateless Node.js API on Render [22], a static React bundle on Vercel [23], and a managed MongoDB cluster on Atlas [16]. This appendix records the hosting assignment, the environment configuration of each platform, and the issues encountered — and resolved — during the production rollout.
 
-<!-- table: Hosting assignment of the three production components -->
+<!-- table: Hosting assignment of the three production components [22], [23] -->
 
 | Component          | Provider      | Runtime / Service                                              | Production Address                             |
 | ------------------ | ------------- | -------------------------------------------------------------- | ---------------------------------------------- |
@@ -122,7 +136,7 @@ Vite inlines variables at build time, so the value must exist before the build r
 
 ### D.4 Deployment Issues Encountered and Their Resolutions
 
-<!-- table: Issues observed during the production rollout and the corrective action taken -->
+<!-- table: Issues observed during the production rollout and the corrective action taken [22], [23] -->
 
 | Symptom                                                                          | Root Cause                                                                               | Resolution                                                           |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |

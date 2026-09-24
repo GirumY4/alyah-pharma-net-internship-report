@@ -11,7 +11,7 @@ references.
 
 Bahir Dar, Ethiopia — September 21, 2026
 
-Signature: ______________
+Signature: ______________________
 
 Girum Yasab (BDU1506302)
 
@@ -45,39 +45,39 @@ throughout this journey.
 
 ## Executive Summary
 
-This report documents the internship undertaken at Alyah Softwares as a
+This report documents the internship undertaken at Alyah Softwares [6] as a
 full-stack intern on the Web & Backend team, and the engineering work
 delivered during that period: the design, implementation, and deployment of
 **Alyah Pharma Net**, a B2B2C multi-tenant SaaS pharmaceutical logistics
-platform.
+platform [1].
 
 The platform addresses a concrete public-health problem in Ethiopia.
-Medicine discovery still operates on a "phone call and walk-in" model:
+Medicine discovery still operates on a "phone call and walk-in" model [2]:
 patients physically visit or telephone pharmacies one by one to locate a
 required drug, while independent pharmacies manage stock on paper or
 spreadsheets, miss reorder windows, and struggle to demonstrate the
-traceability expected by the Ethiopian Food and Drug Authority (EFDA).
+traceability expected by the Ethiopian Food and Drug Authority (EFDA) [12].
 Alyah Pharma Net replaces this fragmentation with a centralized digital
 marketplace in which each pharmacy operates as an isolated SaaS tenant and
 public consumers search live availability across all onboarded pharmacies.
 
 The delivered system consists of a shared Node.js/Express v5 REST API written
 in TypeScript, a MongoDB (Mongoose v9) database enforcing tenant isolation
-through `pharmacyId` keys extracted from signed JWTs, and a React 19 + Vite
+through `pharmacyId` keys extracted from signed JWTs [14], and a React 19 + Vite
 SaaS dashboard for pharmacy managers and system administrators. Implemented
 modules cover authentication and three-tier role-based access control;
-tenant-scoped medicine catalogs with batch, GTIN, and expiry tracking;
+tenant-scoped medicine catalogs with batch, GTIN [13], and expiry tracking;
 immutable GRN/GIN stock ledgers; a consumer-to-pharmacy order lifecycle with
 atomic stock deduction inside MongoDB transactions; payment recording;
 tenant-scoped and platform-wide analytics; and append-only audit logs that
-simulate ALCOA+ and 21 CFR Part 11 data-integrity practice. The public
+simulate ALCOA+ and 21 CFR Part 11 data-integrity practice [10], [11]. The public
 marketplace search aggregates stock across tenants while withholding
 sensitive operational fields. The backend is deployed on Render, the
 dashboard on Vercel, and the database on MongoDB Atlas.
 
 The work followed a specification-driven process: an IEEE 29148-aligned
-Software Requirements Specification, a Software Design Specification, an API
-contract, and a database schema reference were authored first and treated as
+Software Requirements Specification [9], a Software Design Specification [2], an API
+contract [3], and a database schema reference [4] were authored first and treated as
 the source of truth throughout implementation, code review, and testing.
 Git/GitHub with conventional commits, peer code review, and iterative
 production debugging (build pipeline failures, CORS configuration,

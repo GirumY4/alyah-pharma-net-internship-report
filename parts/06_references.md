@@ -25,3 +25,7 @@ documents are included as required by the internship report outline.
 21. MUI Team, *Material UI v9 Documentation*, 2026. Available: https://mui.com
 22. Render Inc., *Render Documentation: Web Services and Environment Configuration*, 2026. Available: https://render.com/docs
 23. Vercel Inc., *Vercel Documentation: Builds and Environment Variables*, 2026. Available: https://vercel.com/docs
+24. Conventional Commits contributors, *Conventional Commits 1.0.0 Specification*, version 1.0.0, 2021. Available: https://www.conventionalcommits.org/en/v1.0.0/
+25. Postman Inc., *Postman API Client Documentation*, 2026. Available: https://www.postman.com
+26. N. Provos and D. Mazières, "A Future-Adaptable Password Scheme," in *Proceedings of the 1999 USENIX Annual Technical Conference*, Monterey, CA, 1999.
+27. Helmet contributors, *Helmet.js: HTTP security headers middleware for Express* [package documentation], 2026. Available: https://www.npmjs.com/package/helmet

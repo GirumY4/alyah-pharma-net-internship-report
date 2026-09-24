@@ -1,7 +1,7 @@
 ## General Conclusion
 
 The internship undertaken at Alyah Software — the enterprise software
-division of the Alyah Technologies group — and the project work executed
+division of the Alyah Technologies group [6] — and the project work executed
 within it have together achieved everything they were established to
 achieve. Placed in the Web & Backend delivery team under the supervision of
 Mr. Ermias Antigegn and the academic mentorship of Siranesh G., I entered
@@ -14,17 +14,18 @@ The project itself, Alyah Pharma Net, addressed a problem of direct public
 consequence: medicine discovery in Ethiopian towns still runs on a
 "phone call and walk-in" model, independent pharmacies manage stock on
 paper or spreadsheets, and neither can produce the batch-level traceability
-that the Ethiopian Food and Drug Authority expects. The delivered platform
-closes all three gaps with a single architecture — a shared backend that
-isolates each pharmacy's operational data through JWT-derived tenant keys
-while exposing a public, cross-tenant marketplace search — and it does so
-with properties rarely present in student work: provable tenant isolation,
-atomic stock deduction inside database transactions, schema-level
+that the Ethiopian Food and Drug Authority expects [12]. The delivered
+platform closes all three gaps with a single architecture — a shared backend
+that isolates each pharmacy's operational data through JWT-derived tenant
+keys while exposing a public, cross-tenant marketplace search — and it does
+so with properties rarely present in student work: provable tenant
+isolation, atomic stock deduction inside database transactions, schema-level
 immutability on audit and ledger collections simulating ALCOA+ and
-21 CFR Part 11, FEFO batch selection aligned with the EFDA Traceability
-Directive, and a live deployment across Render, Vercel, and MongoDB Atlas.
-All eight specific objectives set for the project were achieved, and no
-requirement in the governing specification remains unimplemented.
+21 CFR Part 11 [10], [11], FEFO batch selection aligned with the EFDA
+Traceability Directive [12], and a live deployment across Render, Vercel,
+and MongoDB Atlas [22], [23]. All eight specific objectives set for the
+project were achieved, and no requirement in the governing specification
+remains unimplemented [1].
 
 Beyond the artefacts, the internship produced a transformation in how I
 work. Practically, I can now carry a feature from written requirement to
@@ -56,7 +57,7 @@ below.
 - **Integrate a real payment gateway** suitable for the Ethiopian market, such as Chapa or SantimPay, so that consumer payments are processed online rather than recorded manually.
 - **Introduce staff sub-accounts** within each pharmacy tenant so that multi-employee pharmacies can operate with distinct pharmacist, cashier, and manager logins under one tenant.
 - **Implement two-factor authentication** for administrator and pharmacy-manager accounts, given the sensitivity of the operational and financial data the platform holds.
-- **Provide EFDA GS1 reporting export** so that the GTIN and batch data already captured can be submitted in the format the regulator expects, turning compliance from a side-effect into a deliverable.
+- **Provide EFDA GS1 reporting export** [12], [13] so that the GTIN and batch data already captured can be submitted in the format the regulator expects, turning compliance from a side-effect into a deliverable.
 
 ### Recommendation to the Hosting Company
 

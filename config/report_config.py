@@ -18,11 +18,10 @@ REPORT = {
 }
 
 PART_TITLES = [
-    "Part One — Front Matter",
-    "Part Two — Company Background",
-    "Part Three — Internship Experience",
-    "Part Four — Project Work",
-    "Part Five — General Conclusion and Recommendation",
+    "Chapter One — Company Background",
+    "Chapter Two — Internship Experience",
+    "Chapter Three — Project Work",
+    "Chapter Four — General Conclusion and Recommendation",
     "References",
     "Appendices",
 ]

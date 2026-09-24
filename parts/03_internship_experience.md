@@ -3,12 +3,12 @@
 During the internship period I was placed in the engineering function of
 Alyah Software, the enterprise software division of the Alyah Technologies
 group, and more specifically within the Web & Backend delivery team of the
-intern development group. Under the group's lean, shared-team model, the
+intern development group [6]. Under the group's lean, shared-team model, the
 engineering function builds and maintains Alyah ERP, the matching and escrow
 technology behind the Aezop marketplace, and custom client systems; it is the
 unit in which the company's Core Software Engineer role — held by my company
 supervisor, Mr. Ermias Antigegn — is anchored, and it was therefore the unit
-best able to provide the close technical supervision my internship required.
+best able to provide the close technical supervision my internship required [6].
 
 Three reasons made this section the natural placement for me. First, my
 academic background in the Department of Computer Engineering at Bahir Dar
@@ -16,12 +16,12 @@ Institute of Technology concentrated on software engineering, database
 systems, and networked applications, which correspond directly to the work
 the Web & Backend team performs daily. Second, the team's assignment for the
 internship cohort — designing and building Alyah Pharma Net, a multi-tenant
-SaaS pharmaceutical logistics platform — demanded exactly the full-stack
+SaaS pharmaceutical logistics platform [1] — demanded exactly the full-stack
 competence I wanted to develop: RESTful API engineering, multi-tenant
 database design, and a production React dashboard. Third, the company's
 development culture, in which specifications are written before code and
 every change passes peer review, offered an environment in which engineering
-discipline could be learned alongside engineering skill. I therefore requested,
+discipline could be learned alongside engineering skill [5]. I therefore requested,
 and was assigned to, the Web & Backend team, where I remained for the entire
 internship under the supervision of Mr. Ermias Antigegn and the academic
 mentorship of Siranesh G.
@@ -34,8 +34,8 @@ principal tasks I executed were the following.
 
 - **Shared backend API development.** I implemented, in Node.js with
   Express v5 and TypeScript, the authentication and user-management module
-  (registration, bcrypt password hashing, JWT issuance with embedded tenant
-  identity, role-based access control middleware), the tenant-scoped medicine
+  (registration, bcrypt password hashing [26], JWT issuance with embedded tenant
+  identity [14], role-based access control middleware), the tenant-scoped medicine
   and inventory module (catalogue CRUD, batch and expiry tracking, GRN/GIN
   stock adjustments against an immutable ledger), the cross-tenant order
   module (order placement with pre-flight stock validation, the
@@ -47,14 +47,14 @@ principal tasks I executed were the following.
   marketplace search endpoint, an aggregation pipeline that joins medicine
   records with their owning pharmacy, filters inactive tenants, applies city
   filtering before pagination, and withholds sensitive operational fields
-  from public responses.
+  from public responses [3].
 - **Data-integrity engineering.** I wrote the centralized audit logging
   utility that captures before/after state snapshots, actor identity, IP
   address, and User-Agent for every data-modifying operation, and I enforced
   schema-level immutability on the audit log and inventory transaction
-  collections through Mongoose pre-hooks.
+  collections through Mongoose pre-hooks [10], [11].
 - **SaaS dashboard development.** On the frontend I built, in React 19 with
-  TypeScript and Vite, the feature-based dashboard modules: the tenant
+  TypeScript and Vite [18], [19], [20], the feature-based dashboard modules: the tenant
   dashboard with KPI cards and FEFO alerts, the inventory grid with batch
   expansion and slide-out forms, the order fulfillment workspace with a
   status stepper and payment drawer, the reports and analytics pages with
@@ -62,16 +62,16 @@ principal tasks I executed were the following.
   console, and the profile settings screens, all wired to the shared API
   through a typed Axios client with centralized error mapping.
 - **Documentation.** I co-authored and maintained the project's four
-  governing documents — the IEEE 29148-aligned Software Requirements
-  Specification, the Software Design Specification, the REST API
-  documentation, and the database schema reference — and treated them as the
+  governing documents — the IEEE 29148-aligned [9] Software Requirements
+  Specification [1], the Software Design Specification [2], the REST API
+  documentation [3], and the database schema reference [4] — and treated them as the
   source of truth throughout implementation.
 - **Code review and consolidation.** I participated in structured peer
   reviews in which parallel implementations of the same module were compared
   against the specification and consolidated into a single production-grade
-  version, and I applied the resulting corrections across the codebase.
-- **Deployment and operations.** I deployed the backend to Render, the
-  frontend to Vercel, and the database to MongoDB Atlas; configured
+  version, and I applied the resulting corrections across the codebase [8].
+- **Deployment and operations.** I deployed the backend to Render [22], the
+  frontend to Vercel [23], and the database to MongoDB Atlas [16]; configured
   environment variables, CORS whitelisting, and health-check endpoints; and
   diagnosed and resolved the build and runtime failures described later in
   this part.
@@ -79,25 +79,25 @@ principal tasks I executed were the following.
 ## Engineering Methods, Tools and Techniques Used
 
 The team worked in a specification-driven, iteratively phased manner. Each
-module began from a written requirement with acceptance criteria in the SRS,
-passed through design in the SDS and API contract, was implemented on a
+module began from a written requirement with acceptance criteria in the SRS [1],
+passed through design in the SDS [2] and API contract [3], was implemented on a
 short-lived feature branch, returned to the team through a pull-request
 review, and was merged only when it satisfied the agreed definition of done.
-Commits followed the Conventional Commits format, and the repository
-maintained a protected main branch with an integration branch beneath it.
+Commits followed the Conventional Commits format [24], and the repository
+maintained a protected main branch with an integration branch beneath it [5].
 The principal tools and techniques I used daily are summarized below.
 
 <!-- table: Principal tools and techniques used during the internship -->
 | Category | Tools and Techniques | Purpose in Daily Work |
 | --- | --- | --- |
-| Version control and collaboration | Git and GitHub; branch strategy; Conventional Commits; pull-request peer review | Traceable, reviewable integration of every change |
-| Backend engineering | Node.js, Express v5, TypeScript; modular controller-service-route structure; middleware pipeline (Helmet, CORS, Morgan, centralized error handler) | Stateless RESTful shared API |
-| Database engineering | MongoDB with Mongoose v9; indexing; aggregation pipelines ($lookup, $unwind, $facet); sessions and atomic $inc updates; virtual properties; soft deletes | Multi-tenant storage, reporting, and race-condition-free stock mutation |
-| Security engineering | Stateless JWT with embedded tenant identity; bcrypt hashing; role-based access control middleware; CORS origin whitelisting; HTTPS | Authentication, authorization, and tenant isolation |
-| Frontend engineering | React 19, Vite, TypeScript; feature-based folder architecture; custom data-fetching hooks; Axios interceptors; centralized error mapper; skeleton, empty, and error UI states; MUI design system | Production-grade SaaS dashboard |
-| Documentation engineering | IEEE 29148-aligned SRS, SDS, API contract, database schema reference; requirement traceability matrix | Single source of truth and testable requirements |
-| Data-integrity engineering | ALCOA+ principles; 21 CFR Part 11 simulation; schema-level immutability pre-hooks; append-only ledgers; FEFO batch selection; GTIN traceability fields | Regulatory-grade auditability |
-| Deployment and operations | Render (backend), Vercel (frontend), MongoDB Atlas (database); platform auto-deploy from Git; environment-variable separation; health-check endpoint; post-deployment verification checklist | Repeatable production releases |
+| Version control and collaboration | Git and GitHub; branch strategy; Conventional Commits [24]; pull-request peer review | Traceable, reviewable integration of every change |
+| Backend engineering | Node.js, Express v5 [17], TypeScript [19]; modular controller-service-route structure; middleware pipeline (Helmet [27], CORS, Morgan, centralized error handler) | Stateless RESTful shared API |
+| Database engineering | MongoDB with Mongoose v9 [16]; indexing; aggregation pipelines ($lookup, $unwind, $facet); sessions and atomic $inc updates; virtual properties; soft deletes | Multi-tenant storage, reporting, and race-condition-free stock mutation |
+| Security engineering | Stateless JWT with embedded tenant identity [14]; bcrypt hashing [26]; role-based access control middleware; CORS origin whitelisting; HTTPS | Authentication, authorization, and tenant isolation |
+| Frontend engineering | React 19 [18], Vite [20], TypeScript [19]; feature-based folder architecture; custom data-fetching hooks; Axios interceptors; centralized error mapper; skeleton, empty, and error UI states; MUI design system [21] | Production-grade SaaS dashboard |
+| Documentation engineering | IEEE 29148-aligned SRS [9], SDS [2], API contract [3], database schema reference [4]; requirement traceability matrix [1] | Single source of truth and testable requirements |
+| Data-integrity engineering | ALCOA+ principles [11]; 21 CFR Part 11 simulation [10]; schema-level immutability pre-hooks [4]; append-only ledgers; FEFO batch selection; GTIN traceability fields [12], [13] | Regulatory-grade auditability |
+| Deployment and operations | Render [22], Vercel [23], MongoDB Atlas [16]; platform auto-deploy from Git; environment-variable separation; health-check endpoint; post-deployment verification checklist | Repeatable production releases |
 
 ## Major Challenges and Problems Faced
 
@@ -114,9 +114,9 @@ internship.
   last units of the same medicine simultaneously could, with naive
   read-modify-write code, drive stock negative or fulfill both orders from
   one physical batch. Guaranteeing correctness under concurrency required a
-  deeper understanding of database transactions than I possessed at the start.
-- **Enforcing regulatory-grade immutability.** Simulating ALCOA+ and
-  21 CFR Part 11 meant that audit logs and stock ledgers had to be tamper-
+  deeper understanding of database transactions [16] than I possessed at the start.
+- **Enforcing regulatory-grade immutability.** Simulating ALCOA+ [11] and
+  21 CFR Part 11 [10] meant that audit logs and stock ledgers had to be tamper-
   proof not merely by convention but by construction; any code path that
   could silently update or delete such a record was a compliance defect.
 - **TypeScript strict-mode friction at scale.** As the codebase grew, the
@@ -132,12 +132,12 @@ internship.
 - **Production build and environment failures.** The move to cloud hosting
   exposed platform differences that never appear locally: the build service
   omitted development dependencies and therefore all TypeScript type
-  packages (error TS2688); the case-sensitive Linux filesystem rejected
+  packages (error TS2688) [22]; the case-sensitive Linux filesystem rejected
   imports whose casing differed from the folder names on my machine (error
   TS2307); a missing database connection variable crashed the server at boot;
   an un-whitelisted frontend origin produced CORS rejections; and a missing
   build-time API base URL variable shipped a frontend that rendered a blank
-  page and called its own host for data.
+  page and called its own host for data [23].
 - **Absence of an automated test suite.** Verification relied heavily on
   manual API exercise and browser inspection. While effective for the
   internship's scope, this made regressions expensive to detect and was the
@@ -146,7 +146,7 @@ internship.
 Beyond these technical challenges, the domain itself presented the problem
 later selected for project work: medicine discovery in Ethiopian towns still
 runs on a "phone call and walk-in" model, and independent pharmacies manage
-stock on paper or spreadsheets with no audit trail. The measures below
+stock on paper or spreadsheets with no audit trail [1], [2]. The measures below
 address the technical challenges; the domain problem is treated as the
 project work of Part Four.
 
@@ -158,17 +158,17 @@ became permanent parts of the platform's architecture.
 <!-- table: Challenges, measures taken, and observed results -->
 | # | Challenge | Measure Taken | Result |
 | --- | --- | --- | --- |
-| 1 | Cross-tenant data leakage risk | Tenant key injected only from the verified token by a dedicated middleware; client-supplied tenant values ignored; isolation verified by cross-tenant API tests | Cross-tenant access provably impossible |
-| 2 | Stock race conditions | Stock mutation performed with atomic increment operators inside database sessions guarded by a sufficient-stock condition; ledger entries written in the same transaction | No negative stock; fulfillment is all-or-nothing |
-| 3 | Tamper-prone compliance records | Schema-level pre-hooks rejecting every update, replace, and delete operation on audit and ledger collections; append-only design | Immutability enforced at the database layer |
-| 4 | Strict-mode compile errors | Typed request payloads, explicit null guards, unified middleware signatures, and a single standardized error envelope across all modules | Clean compiler builds locally and in the cloud |
+| 1 | Cross-tenant data leakage risk | Tenant key injected only from the verified token by a dedicated middleware [14]; client-supplied tenant values ignored; isolation verified by cross-tenant API tests | Cross-tenant access provably impossible |
+| 2 | Stock race conditions | Stock mutation performed with atomic increment operators inside database sessions [16] guarded by a sufficient-stock condition; ledger entries written in the same transaction | No negative stock; fulfillment is all-or-nothing |
+| 3 | Tamper-prone compliance records | Schema-level pre-hooks rejecting every update, replace, and delete operation on audit and ledger collections [4]; append-only design | Immutability enforced at the database layer |
+| 4 | Strict-mode compile errors | Typed request payloads, explicit null guards, unified middleware signatures, and a single standardized error envelope across all modules [3] | Clean compiler builds locally and in the cloud |
 | 5 | Frontend runtime defects | Defensive state initialization, complete feature-level export indexes, and a uniform skeleton-error-empty state pattern in every data view | Stable interface with graceful degradation |
-| 6 | Cloud build failures | Forced installation of development dependencies on the build platform; normalized file and import casing to match the case-sensitive filesystem | Reproducible cloud builds |
-| 7 | Environment misconfiguration | A documented environment-variable checklist per platform, a health-check endpoint, and a post-deployment verification checklist | Stable production rollout on three platforms |
+| 6 | Cloud build failures | Forced installation of development dependencies on the build platform [22]; normalized file and import casing to match the case-sensitive filesystem | Reproducible cloud builds |
+| 7 | Environment misconfiguration | A documented environment-variable checklist per platform [22], [23], a health-check endpoint, and a post-deployment verification checklist | Stable production rollout on three platforms |
 
 For the domain problem selected for project work — fragmented medicine
 discovery and manual, unaudited pharmacy inventory — the measure taken was
-the design and construction of the multi-tenant SaaS platform itself: a
+the design and construction of the multi-tenant SaaS platform itself [1]: a
 shared backend that isolates each pharmacy's operational data while
 exposing a public, cross-tenant marketplace search, backed by immutable
 stock and audit ledgers. The analysis, design, and results of that solution
@@ -182,7 +182,7 @@ controller, routes, and middleware — and defend each decision against a
 written specification; build data-heavy React interfaces with typed service
 layers, custom hooks, and professional loading, error, and empty states;
 write MongoDB aggregation pipelines and indexed schemas for real reporting
-workloads; and take an application from a local repository to a live,
+workloads [16]; and take an application from a local repository to a live,
 monitored deployment across three cloud platforms. Debugging ceased to be an
 emergency and became a method: read the stack, reproduce locally, isolate
 the layer, fix the cause, and add the guard that prevents recurrence.
@@ -191,24 +191,24 @@ the layer, fix the cause, and add the guard that prevents recurrence.
 
 Theoretically, the internship deepened my understanding of multi-tenancy
 models and why shared-schema isolation must be enforced at the application
-layer; of transactional integrity and the difference between atomic
-database operations and application-level locking; of data-integrity
-frameworks (ALCOA+ and 21 CFR Part 11) and how immutability, attribution,
-and contemporaneous timestamping are implemented in code; of pharmaceutical
+layer; of transactional integrity and the difference between atomic database
+operations and application-level locking; of data-integrity frameworks
+(ALCOA+ and 21 CFR Part 11) [10], [11] and how immutability, attribution, and
+contemporaneous timestamping are implemented in code; of pharmaceutical
 traceability practice, including FEFO batch selection and GTIN barcoding
-under the EFDA directive; and of stateless security architecture, in which
-the token carries both identity and tenant context so that the server scales
-horizontally without session storage.
+under the EFDA directive [12], [13]; and of stateless security architecture,
+in which the token carries both identity and tenant context so that the
+server scales horizontally without session storage [14].
 
 ## Gains in Terms of Improving Team-Playing Skills
 
 Working in a shared repository with a protected main branch taught me that
 teamwork in software is mostly communication made durable: clear branch
-names, conventional commit messages, pull-request descriptions that explain
-intent, and reviews that critique code rather than people. I learned to
-split work cleanly with the mobile team by publishing an API contract first,
-to accept consolidated rewrites of my own code without friction, and to hold
-a shared definition of done rather than a personal one.
+names, conventional commit messages [24], pull-request descriptions that
+explain intent, and reviews that critique code rather than people. I learned
+to split work cleanly with the mobile team by publishing an API contract
+first, to accept consolidated rewrites of my own code without friction, and
+to hold a shared definition of done rather than a personal one.
 
 ## Gains in Terms of Improving Leadership Skills
 
@@ -224,28 +224,28 @@ for a task.
 ## Understanding of Work Ethics, Industrial Psychology and Related Issues
 
 The platform's own design became my lesson in work ethics: every mutation
-attributable, every record immutable, every deletion soft and traceable. In
-practice I experienced why such discipline exists — because organizations
-fail quietly when actions cannot be attributed — and I carried it into my
-own conduct: honest reporting of progress and of mistakes, respect for
-reviewers' time through small, well-described changes, and punctuality
-against sprint commitments. Observing how feedback cycles, supervision
-sessions, and shared ownership affected morale gave me a practical
-introduction to industrial psychology: teams perform when criticism is safe,
-expectations are explicit, and credit is shared.
+attributable, every record immutable, every deletion soft and traceable
+[11]. In practice I experienced why such discipline exists — because
+organizations fail quietly when actions cannot be attributed — and I carried
+it into my own conduct: honest reporting of progress and of mistakes,
+respect for reviewers' time through small, well-described changes, and
+punctuality against sprint commitments. Observing how feedback cycles,
+supervision sessions, and shared ownership affected morale gave me a
+practical introduction to industrial psychology: teams perform when
+criticism is safe, expectations are explicit, and credit is shared.
 
 ## Gains in Terms of Entrepreneurship Skills
 
 Alyah Technologies operates as a single pipeline — enterprise software
-funding the group, the Innovation Hub supplying trained talent, and the Aezop
-marketplace converting talent into paid opportunity — and working inside
-that model taught me how a technology business actually creates value. I
-learned to read a feature as a cost and a revenue line: tenant onboarding as
-the SaaS growth mechanism, pharmacy inventory data as the asset that makes
-the marketplace trustworthy, and compliance tooling as a differentiator that
-independent pharmacies could never build alone. Designing Alyah Pharma Net
-forced me to think in terms of customers, tenants, and unit economics rather
-than only in terms of code.
+funding the group, the Innovation Hub supplying trained talent, and the
+Aezop marketplace converting talent into paid opportunity [6] — and working
+inside that model taught me how a technology business actually creates
+value. I learned to read a feature as a cost and a revenue line: tenant
+onboarding as the SaaS growth mechanism, pharmacy inventory data as the
+asset that makes the marketplace trustworthy, and compliance tooling as a
+differentiator that independent pharmacies could never build alone.
+Designing Alyah Pharma Net forced me to think in terms of customers,
+tenants, and unit economics rather than only in terms of code.
 
 ## Gains in Terms of Improving Interpersonal Communication Skills
 
